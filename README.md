@@ -44,6 +44,9 @@ npm install
 ```bash
 cp env.example .env
 # Edite o arquivo .env com suas configurações
+
+# Para testes, configure também:
+cp env.test .env.test
 ```
 
 4. **Suba o banco de dados**
@@ -135,11 +138,22 @@ curl -X POST http://localhost:3333/pets \
 
 ## 🧪 Testes
 
+### Configuração do Ambiente de Testes
+
+1. **Configure as variáveis de ambiente para testes:**
 ```bash
-# Configurar ambiente de testes (primeira vez)
+cp env.test .env.test
+```
+
+2. **Configure o ambiente Prisma para testes (primeira vez):**
+```bash
 npm run test:create-prisma-environment
 npm run test:install-prisma-enviroment
+```
 
+### Executando os Testes
+
+```bash
 # Executar todos os testes
 npm run test
 
@@ -155,6 +169,20 @@ npm run test:coverage
 # Interface visual dos testes
 npm run test:ui
 ```
+
+### Variáveis de Ambiente para Testes
+
+O arquivo `.env.test` deve conter:
+```env
+# Database
+DATABASE_URL="postgresql://docker:docker@localhost:5443/findafriend_test?schema=public"
+
+# App
+APP_SECRET="test-secret-key"
+NODE_ENV=test
+```
+
+**Nota:** Os testes usam um banco de dados separado (`findafriend_test`) para não interferir com o banco de desenvolvimento.
 
 ## 🏗️ Arquitetura
 
