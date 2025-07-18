@@ -1,0 +1,308 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-07-18T21:35:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_root",
+      "parentId": "wrk_findafriend",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "url": "{{ _.base_url }}",
+      "name": "Root",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1731882900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_register_org",
+      "parentId": "fld_orgs",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "url": "{{ _.base_url }}/orgs",
+      "name": "Register ORG",
+      "description": "Register a new organization",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Pet Friends\",\n  \"email\": \"petfriends@example.com\",\n  \"password\": \"12345678\",\n  \"address\": \"Rua das Flores, 123 - São Paulo, SP\",\n  \"whatsapp\": \"11999999999\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1731882900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_authenticate_org",
+      "parentId": "fld_orgs",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "url": "{{ _.base_url }}/sessions",
+      "name": "Authenticate ORG",
+      "description": "Login as an organization",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"petfriends@example.com\",\n  \"password\": \"12345678\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1731882900001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_refresh_token",
+      "parentId": "fld_orgs",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "url": "{{ _.base_url }}/token/refresh",
+      "name": "Refresh Token",
+      "description": "Refresh JWT token",
+      "method": "PATCH",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1731882900002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_create_pet",
+      "parentId": "fld_pets",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "url": "{{ _.base_url }}/pets",
+      "name": "Create Pet",
+      "description": "Create a new pet (requires authentication)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Buddy\",\n  \"description\": \"A friendly golden retriever\",\n  \"age\": \"YOUNG\",\n  \"size\": \"LARGE\",\n  \"energy_level\": \"HIGH\",\n  \"independence_level\": \"MEDIUM\",\n  \"environment\": \"BOTH\",\n  \"requirements\": [\"Large space\", \"Daily exercise\"]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.auth_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1731882900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_search_pets",
+      "parentId": "fld_pets",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "url": "{{ _.base_url }}/pets/search",
+      "name": "Search Pets by City",
+      "description": "Search for pets available for adoption in a city",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "city",
+          "value": "São Paulo",
+          "description": "City to search for pets (required)"
+        },
+        {
+          "name": "age",
+          "value": "YOUNG",
+          "description": "Filter by age (optional): PUPPY, YOUNG, ADULT, SENIOR"
+        },
+        {
+          "name": "size",
+          "value": "LARGE",
+          "description": "Filter by size (optional): SMALL, MEDIUM, LARGE"
+        },
+        {
+          "name": "energy_level",
+          "value": "HIGH",
+          "description": "Filter by energy level (optional): LOW, MEDIUM, HIGH"
+        },
+        {
+          "name": "independence_level",
+          "value": "MEDIUM",
+          "description": "Filter by independence level (optional): LOW, MEDIUM, HIGH"
+        },
+        {
+          "name": "environment",
+          "value": "BOTH",
+          "description": "Filter by environment (optional): INDOOR, OUTDOOR, BOTH"
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1731882900001,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_pet_details",
+      "parentId": "fld_pets",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "url": "{{ _.base_url }}/pets/{{ _.pet_id }}",
+      "name": "Get Pet Details",
+      "description": "Get detailed information about a specific pet",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1731882900002,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_findafriend",
+      "parentId": null,
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "name": "FindAFriend API",
+      "description": "API para adoção de animais - FindAFriend",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "fld_orgs",
+      "parentId": "wrk_findafriend",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "name": "Organizations",
+      "description": "Endpoints relacionados a organizações",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1731882900000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_pets",
+      "parentId": "wrk_findafriend",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "name": "Pets",
+      "description": "Endpoints relacionados a pets",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1731882900001,
+      "_type": "request_group"
+    },
+    {
+      "_id": "env_development",
+      "parentId": "wrk_findafriend",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "name": "Development",
+      "data": {
+        "base_url": "http://localhost:3333",
+        "auth_token": "",
+        "pet_id": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "auth_token",
+          "pet_id"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1731882900000,
+      "_type": "environment"
+    },
+    {
+      "_id": "env_test",
+      "parentId": "wrk_findafriend",
+      "modified": 1731882900000,
+      "created": 1731882900000,
+      "name": "Test",
+      "data": {
+        "base_url": "http://localhost:3333",
+        "auth_token": "",
+        "pet_id": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "auth_token",
+          "pet_id"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1731882900001,
+      "_type": "environment"
+    }
+  ]
+} 
